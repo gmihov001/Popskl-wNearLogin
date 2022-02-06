@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Switch } from "react-native";
 
-export default function Main() {
+export function Main() {
   let [isEnabled, setIsEnabled] = useState(false);
 
   return (

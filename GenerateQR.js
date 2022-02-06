@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Switch } from "react-native";
-import { NativeRouter, Switch, Route } from "react-router-native";
-import Main from "./Main";
 
-export default function App() {
+export function GenerateQR() {
   return (
     <View style={styles.container}>
       <TouchableOpacity

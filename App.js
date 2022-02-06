@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Switch } from "react-native";
-import { NativeRouter, Switch, Route } from "react-router-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Main from "./Main";
+import GenerateQR from "./GenerateQR";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function App() {
   return (
-    <NativeRouter>
-      <View style={styles.container}>
-        <Switch>
-          <Route exact path="/main" component={Main} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/" component={Home} />
-        </Switch>
-      </View>
-    </NativeRouter>
+    <View style={styles.container}>
+      <Text>Hello</Text>
+    </View>
   );
 }
 
