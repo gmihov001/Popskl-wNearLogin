@@ -1,17 +1,23 @@
-import { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import GenerateQR from "./GenerateQR";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Main } from "./Main";
+import { GenerateQR } from "./GenerateQR";
+import { ReadQR } from "./ReadQR";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello</Text>
-    </View>
+    // <View style={styles.container}>
+    //   <Text>Hello</Text>
+    // </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Main" component={Main} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
