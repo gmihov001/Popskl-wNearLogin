@@ -13,27 +13,32 @@ export function GenerateQR() {
     "https://3000-4geeksacademy-flaskresth-t8qn0i28cw9.ws-us30.gitpod.io/reading";
 
   useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestBackgroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
+    let isCancelled = false;
+
+    if (!isCancelled) {
+      (async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          setErrorMsg("Permission to access location was denied");
+          return;
+        }
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
+      })();
+    }
+
+    return () => (isCancelled = true);
   }, []);
 
-  let text = "Waiting...";
-
   if (errorMsg) {
-    text = errorMsg;
+    alert(errorMsg);
   } else if (location) {
     dataObj = {
       claimant: user,
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
     };
+    console.log(dataObj);
   }
 
   return (
@@ -41,7 +46,9 @@ export function GenerateQR() {
       {dataObj ? (
         <SvgQRCode size={180} value={JSON.stringify(dataObj)} />
       ) : (
-        "Loading..."
+        <Text style={{ fontSize: 20, color: "royalblue", textAlign: "center" }}>
+          Generating... Please hold
+        </Text>
       )}
     </View>
   );

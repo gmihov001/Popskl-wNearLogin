@@ -57,7 +57,7 @@ export function ReadQR() {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      {scanned && (
+      {scanned ? (
         <TouchableOpacity
           onPress={() => setScanned(false)}
           style={{
@@ -74,7 +74,7 @@ export function ReadQR() {
             Tap to Scan Again
           </Text>
         </TouchableOpacity>
-      )}
+      ) : null}
     </View>
   );
 }
