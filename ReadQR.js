@@ -5,7 +5,10 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 export function ReadQR() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [thisUser, setThisUser] = useState("Proving User");
+  const [thisUser, setThisUser] = useState("Verifying User");
+
+  const uri =
+    "https://3000-4geeksacademy-flaskresth-t8qn0i28cw9.ws-us30.gitpod.io/reading";
 
   useEffect(() => {
     (async () => {
@@ -16,9 +19,28 @@ export function ReadQR() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     let dataJson = JSON.parse(data);
+    dataJson.timestamp = new Date();
+    dataJson.verifier = thisUser;
+    console.log(dataJson);
 
-    alert(`Bar code data ${dataJson.claimant} scanned`);
-    console.log(dataJson.claimant);
+    fetch(uri, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataJson),
+    })
+      .then((res) => res.json())
+      .then((resJson) => {
+        console.log(`QR data saved for: `, resJson);
+        alert("QR data saved");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("QR data failed: Scan again");
+      });
+
     setScanned(true);
   };
 
