@@ -1,14 +1,14 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import * as React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Switch } from "react-native";
 
-export function Main() {
-  let [isEnabled, setIsEnabled] = useState(false);
+export function Main({ navigation }) {
+  let [isEnabled, setIsEnabled] = React.useState(false);
 
   return (
     <View style={styles.container}>
       <Text style={{ fontSize: 20, textAlign: "left" }}>
-        Use my current location{" "}
+        Use my current location
       </Text>
       <Text style={{ fontSize: 18, textAlign: "left" }}>Required </Text>
       <StatusBar style="auto" />
@@ -21,7 +21,7 @@ export function Main() {
         value={isEnabled}
       />
       <TouchableOpacity
-        onPress={() => alert("Hello, world!")}
+        onPress={() => navigation.navigate("Generate QR")}
         style={{
           backgroundColor: "royalblue",
           borderRadius: "15px",
@@ -37,7 +37,7 @@ export function Main() {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => alert("Hello, world!")}
+        onPress={() => navigation.navigate("Read QR")}
         style={{
           backgroundColor: "royalblue",
           borderRadius: "15px",

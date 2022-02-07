@@ -16,7 +16,7 @@ export function ReadQR() {
         }}
       >
         <Text style={{ fontSize: 20, color: "#fff", textAlign: "center" }}>
-          GENERATE QR CODE
+          READ QR CODE
         </Text>
       </TouchableOpacity>
     </View>

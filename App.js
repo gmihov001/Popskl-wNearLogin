@@ -14,8 +14,10 @@ export default function App() {
     //   <Text>Hello</Text>
     // </View>
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Main">
         <Stack.Screen name="Main" component={Main} />
+        <Stack.Screen name="Generate QR" component={GenerateQR} />
+        <Stack.Screen name="Read QR" component={ReadQR} />
       </Stack.Navigator>
     </NavigationContainer>
   );
