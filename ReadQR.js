@@ -1,6 +1,11 @@
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Switch } from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 export function ReadQR() {
+  const [hasPermission, setHasPermission] = useState(null);
+  const [svanned, setScanned] = useState(false);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
