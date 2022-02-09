@@ -17,7 +17,7 @@ export function Main({ navigation }) {
       <Text style={{ fontSize: 20, textAlign: "left" }}>
         Use my current location
       </Text>
-      <StatusBar style="auto" />
+
       <Switch
         style={{ marginBottom: "40%" }}
         trackColor={{ false: "#767577", true: "#81b0ff" }}

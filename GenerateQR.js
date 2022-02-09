@@ -4,10 +4,10 @@ import SvgQRCode from "react-native-qrcode-svg";
 import * as Location from "expo-location";
 
 export function GenerateQR() {
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  // const [location, setLocation] = useState(null);
+  // const [errorMsg, setErrorMsg] = useState(null);
   const [user, setUser] = useState("George Mihov");
-  var dataObj = null;
+  const [dataObj, setDataObj] = useState(null);
 
   const uri =
     "https://3000-4geeksacademy-flaskresth-t8qn0i28cw9.ws-us30.gitpod.io/reading";
@@ -19,25 +19,25 @@ export function GenerateQR() {
       (async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") {
-          setErrorMsg("Permission to access location was denied");
+          alert("Permission to access location was denied");
           return;
         }
         let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
+        // setLocation(location);
+        if (location) {
+          setDataObj({
+            claimant: user,
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+          });
+        }
       })();
     }
 
     return () => (isCancelled = true);
   }, []);
 
-  if (errorMsg) {
-    alert(errorMsg);
-  } else if (location) {
-    dataObj = {
-      claimant: user,
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-    };
+  if (dataObj) {
     alert(
       `QR generated for claimant: ${dataObj.claimant}, coordinates: ${dataObj.latitude}, ${dataObj.longitude}`
     );
