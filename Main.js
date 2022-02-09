@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import * as React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Switch } from "react-native";
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Switch,
+  Button,
+} from "react-native";
 
 export function Main({ navigation }) {
   let [isEnabled, setIsEnabled] = React.useState(false);
@@ -10,7 +17,6 @@ export function Main({ navigation }) {
       <Text style={{ fontSize: 20, textAlign: "left" }}>
         Use my current location
       </Text>
-      <Text style={{ fontSize: 18, textAlign: "left" }}>Required </Text>
       <StatusBar style="auto" />
       <Switch
         style={{ marginBottom: "40%" }}
@@ -24,7 +30,7 @@ export function Main({ navigation }) {
         onPress={() => navigation.navigate("Generate QR")}
         style={{
           backgroundColor: "royalblue",
-          borderRadius: "15px",
+          borderRadius: 15,
           width: "90%",
           margin: "5%",
           padding: "5%",
@@ -33,14 +39,14 @@ export function Main({ navigation }) {
         }}
       >
         <Text style={{ fontSize: 20, color: "#fff", textAlign: "center" }}>
-          A
+          Generate QR
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate("Read QR")}
         style={{
           backgroundColor: "royalblue",
-          borderRadius: "15px",
+          borderRadius: 15,
           width: "90%",
           padding: "5%",
           display: "flex",
@@ -48,7 +54,7 @@ export function Main({ navigation }) {
         }}
       >
         <Text style={{ fontSize: 20, color: "#fff", textAlign: "center" }}>
-          B
+          Read QR
         </Text>
       </TouchableOpacity>
     </View>

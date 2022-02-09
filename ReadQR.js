@@ -5,7 +5,7 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 export function ReadQR() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [thisUser, setThisUser] = useState("Verifying User");
+  const [thisUser, setThisUser] = useState("Abe Uccello");
 
   const uri =
     "https://3000-4geeksacademy-flaskresth-t8qn0i28cw9.ws-us30.gitpod.io/reading";
@@ -22,6 +22,9 @@ export function ReadQR() {
     dataJson.timestamp = new Date();
     dataJson.verifier = thisUser;
     console.log(dataJson);
+    alert(
+      `QR data received by verifier: ${dataJson.verifier}, date/time: ${dataJson.timestamp}`
+    );
 
     fetch(uri, {
       method: "POST",
@@ -38,7 +41,6 @@ export function ReadQR() {
       })
       .catch((err) => {
         console.log(err);
-        alert("QR data failed: Scan again");
       });
 
     setScanned(true);
@@ -62,7 +64,7 @@ export function ReadQR() {
           onPress={() => setScanned(false)}
           style={{
             backgroundColor: "royalblue",
-            borderRadius: "15px",
+            borderRadius: 15,
             width: "90%",
             margin: "5%",
             padding: "5%",

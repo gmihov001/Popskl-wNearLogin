@@ -6,7 +6,7 @@ import * as Location from "expo-location";
 export function GenerateQR() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [user, setUser] = useState("Claimant User");
+  const [user, setUser] = useState("George Mihov");
   var dataObj = null;
 
   const uri =
@@ -38,7 +38,9 @@ export function GenerateQR() {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
     };
-    console.log(dataObj);
+    alert(
+      `QR generated for claimant: ${dataObj.claimant}, coordinates: ${dataObj.latitude}, ${dataObj.longitude}`
+    );
   }
 
   return (
