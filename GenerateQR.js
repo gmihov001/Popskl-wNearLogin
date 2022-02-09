@@ -3,10 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, Switch } from "react-native";
 import SvgQRCode from "react-native-qrcode-svg";
 import * as Location from "expo-location";
 
-export function GenerateQR() {
-  // const [location, setLocation] = useState(null);
-  // const [errorMsg, setErrorMsg] = useState(null);
-  const [user, setUser] = useState("George Mihov");
+export function GenerateQR({ route, navigation }) {
+  const [user, setUser] = useState(route.params.user);
   const [dataObj, setDataObj] = useState(null);
 
   const uri =

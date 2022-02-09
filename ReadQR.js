@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Switch } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
-export function ReadQR() {
+export function ReadQR({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [thisUser, setThisUser] = useState("Abe Uccello");
+  const [thisUser, setThisUser] = useState(route.params.user);
 
   const uri =
     "https://3000-4geeksacademy-flaskresth-t8qn0i28cw9.ws-us30.gitpod.io/reading";

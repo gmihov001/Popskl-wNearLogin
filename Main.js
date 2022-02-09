@@ -9,8 +9,10 @@ import {
   Button,
 } from "react-native";
 
-export function Main({ navigation }) {
+export function Main({ route, navigation }) {
   let [isEnabled, setIsEnabled] = React.useState(false);
+  // let params = navigation.getParam("user");
+  console.log(route.params.user);
 
   return (
     <View style={styles.container}>
@@ -27,7 +29,7 @@ export function Main({ navigation }) {
         value={isEnabled}
       />
       <TouchableOpacity
-        onPress={() => navigation.navigate("Generate QR")}
+        onPress={() => navigation.navigate("Generate QR", route.params)}
         style={{
           backgroundColor: "royalblue",
           borderRadius: 15,
@@ -43,7 +45,7 @@ export function Main({ navigation }) {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Read QR")}
+        onPress={() => navigation.navigate("Read QR", route.params)}
         style={{
           backgroundColor: "royalblue",
           borderRadius: 15,
