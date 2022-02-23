@@ -9,7 +9,26 @@ import { ReadQR } from "./ReadQR";
 
 const Stack = createNativeStackNavigator();
 
+let localStorageData = {};
+window.localStorage = {
+  getItem: (key) => localStorageData[key],
+
+  removeItem: (key) => localStorageData[key],
+  setItem: (key, value) => {
+    localStorageData[key] = value;
+  },
+  clear: () => {
+    localStorageData = {};
+  },
+};
+
+window.location = { ...window.location, href: "" };
+
 export default function App() {
+  console.log("Object.keys(window): ", Object.keys(window));
+  console.log("window.localStorage: ", window.localStorage);
+  console.log("window.location: ", window.location);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SignIn">
