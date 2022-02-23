@@ -1,10 +1,19 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import "regenerator-runtime/runtime";
+import { initContract, login, logout } from "./initContract";
+// import { showMessage } from "react-native-flash-message";
+// import { ColorDotsLoader } from "react-native-indicator/index";
 
 export function SignIn({ navigation }) {
   const [signedIn, setSignedIn] = React.useState(false);
   const [userData, setUserData] = React.useState("Georgi Mihov"); //auth fetch in a useEffect will feed this var with auth info
+
+  useEffect(() => {
+    console.log(global.walletConnection);
+    console.log(walletConnection);
+  }, []);
 
   return (
     <View style={styles.container}>
