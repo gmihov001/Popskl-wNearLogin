@@ -16,11 +16,10 @@ LogBox.ignoreAllLogs(); //Ignore all log notifications
 // const { keyStores, KeyPair, utils } = nearAPI;
 
 const nearConfig = getConfig(process.env.NODE_ENV || "testnet");
-const walletConnection;
 
 export async function initContract(accountName, publicKey, privateKey) {
   //get config details for testnet for given contract defined in the config.js file
-  
+
   //   // creating a inMemoryKey keystore
   //   const keyStore = new keyStores.InMemoryKeyStore();
   //   // format key
@@ -58,45 +57,44 @@ export async function initContract(accountName, publicKey, privateKey) {
 
   // // Wallet connection is created by using near connection already established
 
-  walletConnection = new WalletConnection(near);
+  window.walletConnection = new WalletConnection(near);
 
   // Once we get the wallet details , we save the user details like account it and balance in currentUser object
-  let currentUser;
 
-  if (walletConnection.getAccountId()) {
-    currentUser = {
-      accountId: walletConnection.getAccountId(),
-      balance: (await walletConnection.account().state()).amount,
+  if (window.walletConnection.getAccountId()) {
+    window.currentUser = {
+      accountId: window.walletConnection.getAccountId(),
+      balance: (await window.walletConnection.account().state()).amount,
     };
   }
 
   //   // Initializing our contract APIs by contract name and configuration
-  const contract = await new Contract(
-    walletConnection.account(),
+  window.contract = await new Contract(
+    window.walletConnection.account(),
     nearConfig.contractName,
     {
       //send token is our contract change method that sends token
       changeMethods: ["saveUserSubAccounts", "sendToken"],
       viewMethods: ["checkUserVideoWatchHistory"],
       //sender is required for signing in
-      sender: walletConnection.account(),
+      sender: window.walletConnection.account(),
     }
   );
 
   //     //Returns necessary details that will be used in App.js
-  return { contract, currentUser, nearConfig, walletConnection };
+  return { nearConfig };
 }
 
 export function logout() {
-    window.walletConnection.signOut();
-    // reload page
-    window.location.replace(window.location.origin + window.location.pathname);
-  }
-  
+  window.walletConnection.signOut();
+  // reload page
+  window.location.replace(window.location.origin + window.location.pathname);
+}
+
 export function login() {
-// Allow the current app to make calls to the specified contract on the
-// user's behalf.
-// This works by creating a new access key for the user's account and storing
-// the private key in localStorage.
-    window.walletConnection.requestSignIn(nearConfig.contractName);
+  // Allow the current app to make calls to the specified contract on the
+  // user's behalf.
+  // This works by creating a new access key for the user's account and storing
+  // the private key in localStorage.
+  window.walletConnection.requestSignIn(nearConfig.contractName);
 }

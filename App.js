@@ -15,34 +15,51 @@ LogBox.ignoreAllLogs();
 const { utils } = nearAPI;
 const Stack = createNativeStackNavigator();
 
-let localStorageData = {};
+// window.localStorageData = {};
 
-window.localStorage = {
-  getItem: (key) => localStorageData[key],
+// window.localStorage = {
+//   getItem: (key) => localStorageData[key],
 
-  removeItem: (key) => localStorageData[key],
-  setItem: (key, value) => {
-    localStorageData[key] = value;
-  },
-  clear: () => {
-    localStorageData = {};
-  },
-};
+//   removeItem: (key) => localStorageData[key],
+//   setItem: (key, value) => {
+//     localStorageData[key] = value;
+//   },
+//   clear: () => {
+//     localStorageData = {};
+//   },
+// };
 
-// window.location = { ...window.location, href: "" };
+const localStorageMock = (() => {
+  let store = {};
+
+  return {
+    getItem(key) {
+      return store[key] || null;
+    },
+    setItem(key, value) {
+      store[key] = value.toString();
+    },
+    removeItem(key) {
+      delete store[key];
+    },
+    clear() {
+      store = {};
+    },
+  };
+})();
+
+Object.defineProperty(window, "localStorage", {
+  value: localStorageMock,
+});
+
+// window.location.replace({ ...window.location, href: "" });
 
 export default function App() {
-  // console.log("Object.keys(window): ", Object.keys(window));
-  // console.log("window.localStorage: ", window.localStorage);
-  // console.log("window.location: ", window.location);
+  console.log("Object.keys(window): ", Object.keys(window));
+  console.log("window.localStorage: ", window.localStorage);
+  console.log("window.location: ", window.location);
 
-  useEffect(() => {
-    initContract()
-      .then(async (data) => {
-        console.log("initContract data: ", data);
-      })
-      .catch((err) => console.log("initContract error: ", err));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <NavigationContainer>

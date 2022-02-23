@@ -11,8 +11,13 @@ export function SignIn({ navigation }) {
   const [userData, setUserData] = React.useState("Georgi Mihov"); //auth fetch in a useEffect will feed this var with auth info
 
   useEffect(() => {
-    console.log(global.walletConnection);
-    console.log(walletConnection);
+    initContract()
+      .then(async () => {
+        console.log("window.walletConnection: ", window.walletConnection);
+        console.log("window.currentUser: ", window.currentUser);
+        console.log("window.contract: ", window.contract);
+      })
+      .catch((err) => console.log("initContract error: ", err));
   }, []);
 
   return (
