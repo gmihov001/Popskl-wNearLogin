@@ -16,50 +16,80 @@ export function SignIn({ navigation }) {
         console.log("window.walletConnection: ", window.walletConnection);
         console.log("window.currentUser: ", window.currentUser);
         console.log("window.contract: ", window.contract);
+        console.log("signedIn(): ", window.walletConnection.isSignedIn());
       })
       .catch((err) => console.log("initContract error: ", err));
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <Text
-        style={{
-          fontSize: 24,
-          color: "white",
-          fontWeight: "600",
-          textAlign: "center",
-        }}
-      >
-        POPSKL
-      </Text>
-      <Text
-        style={{
-          fontSize: 48,
-          color: "white",
-          fontWeight: "800",
-          textAlign: "center",
-        }}
-      >
-        WELCOME
-      </Text>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Main", { user: userData })}
-        style={{
-          backgroundColor: "white",
-          borderRadius: 15,
-          width: "90%",
-          margin: "5%",
-          padding: "5%",
-          display: "flex",
-          justifyContents: "center",
-        }}
-      >
-        <Text style={{ fontSize: 20, color: "darkblue", textAlign: "center" }}>
-          Sign In
+  if (window.walletConnection.isSignedIn()) {
+    return (
+      <View style={styles.container}>
+        <Text
+          style={{
+            fontSize: 24,
+            color: "white",
+            fontWeight: "600",
+            textAlign: "center",
+          }}
+        >
+          POPSKL
         </Text>
-      </TouchableOpacity>
-    </View>
-  );
+        <Text
+          style={{
+            fontSize: 48,
+            color: "white",
+            fontWeight: "800",
+            textAlign: "center",
+          }}
+        >
+          WELCOME
+        </Text>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <Text
+          style={{
+            fontSize: 24,
+            color: "white",
+            fontWeight: "600",
+            textAlign: "center",
+          }}
+        >
+          POPSKL
+        </Text>
+        <Text
+          style={{
+            fontSize: 48,
+            color: "white",
+            fontWeight: "800",
+            textAlign: "center",
+          }}
+        >
+          WELCOME
+        </Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Main", { user: userData })}
+          style={{
+            backgroundColor: "white",
+            borderRadius: 15,
+            width: "90%",
+            margin: "5%",
+            padding: "5%",
+            display: "flex",
+            justifyContents: "center",
+          }}
+        >
+          <Text
+            style={{ fontSize: 20, color: "darkblue", textAlign: "center" }}
+          >
+            Sign In
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
